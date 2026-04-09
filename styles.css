@@ -724,64 +724,29 @@ body::before {
     .contact-links { width: 100%; }
 }
 
-/* Force phone-friendly layout even when browser uses "Desktop site" */
-@media (hover: none) and (pointer: coarse) {
-    :root { --nav-h: 60px; }
-
-    .page {
-        width: min(100% - 28px, 980px);
-        padding-top: var(--nav-h);
-    }
-
+/* Desktop-site mode on phones/tablets: keep desktop look but avoid awkward spacing */
+@media (hover: none) and (pointer: coarse) and (min-width: 768px) {
     .site-header {
-        justify-content: center;
-        padding: 0 10px;
+        justify-content: flex-end;
+        padding: 0 max(16px, calc((100% - 980px) / 2));
     }
-
     .nav {
-        flex-wrap: nowrap;
-        justify-content: flex-start;
-        gap: 6px;
-        width: 100%;
+        justify-content: flex-end;
+        gap: 2px;
+        width: auto;
+        max-width: 100%;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
     }
     .nav::-webkit-scrollbar { display: none; }
-    .nav-link { padding: 7px 11px; font-size: 0.82rem; white-space: nowrap; }
+    .nav-link { padding: 7px 12px; font-size: 0.87rem; }
 
+    .page { width: min(980px, calc(100% - 34px)); }
     .hero {
-        grid-template-columns: 1fr;
-        min-height: auto;
-        padding-top: 32px;
-        padding-bottom: 18px;
-        gap: 40px;
+        min-height: clamp(520px, calc(100vh - var(--nav-h)), 760px);
+        gap: 82px;
     }
-    .hero-copy {
-        align-items: center;
-        text-align: center;
-        margin: 0 auto;
-        max-width: 100%;
-    }
-    .hero-name { white-space: normal; font-size: clamp(2.1rem, 8.2vw, 3rem); }
-    .hero-role { white-space: normal; }
-    .hero-actions { width: 100%; flex-wrap: wrap; justify-content: center; }
-
-    .button { min-height: 40px; padding: 0 16px; }
-    .art-frame, #d3-art { min-height: 320px; height: 320px; }
-
-    .skills-grid, .profiles-grid { grid-template-columns: 1fr; }
-    .project-item, .contact-row { grid-template-columns: 1fr; }
-    .project-meta {
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: flex-start;
-        min-width: 0;
-        max-width: none;
-        padding-top: 0;
-    }
-    .project-meta-stack, .project-meta-links, .contact-links { justify-content: flex-start; }
 }
 
 @media (prefers-reduced-motion: reduce) {
