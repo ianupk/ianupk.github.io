@@ -31,7 +31,7 @@ document.getElementById("nav-home").addEventListener("click", (e) => {
     window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
-/* ── Generative art (D3) ─────────────────────────── */
+/* ── Art (D3) ─────────────────────────── */
 function renderGenerativeArt() {
     if (typeof d3 === "undefined") return;
     const svg  = d3.select("#d3-art");

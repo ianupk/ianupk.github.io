@@ -20,6 +20,7 @@ body {
     min-height: 100vh;
     font-family: "Manrope", sans-serif;
     color: var(--text);
+    overflow-x: hidden;
     background:
         radial-gradient(circle at top left, rgba(184,216,255,0.06), transparent 28%),
         linear-gradient(180deg, #06080b 0%, #090c10 50%, #0a0f14 100%);
@@ -136,7 +137,7 @@ body::before {
 
 .nav {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: flex-end;
     gap: 2px;
 }
@@ -641,6 +642,27 @@ body::before {
 
 /* ── RESPONSIVE ─────────────────────────────────────── */
 
+/* Helps "Desktop site" mode on phones/tablets stay compact and balanced */
+@media (max-width: 1100px) and (min-width: 768px) {
+    .site-header {
+        justify-content: flex-end;
+        padding: 0 16px;
+    }
+    .nav {
+        justify-content: flex-end;
+        gap: 2px;
+        width: auto;
+        max-width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+    .nav::-webkit-scrollbar { display: none; }
+    .nav-link { padding: 7px 12px; font-size: 0.87rem; }
+    .page { width: min(980px, calc(100% - 34px)); }
+    .hero { gap: 88px; }
+}
+
 @media (max-width: 900px) {
     .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 44px; padding-bottom: 18px; gap: 48px; }
     .skills-grid, .profiles-grid { grid-template-columns: 1fr; }
@@ -653,13 +675,53 @@ body::before {
 
 @media (max-width: 680px) {
     :root { --nav-h: 60px; }
-    .page { width: min(100% - 28px, 980px); }
-    .site-header { padding: 0 14px; }
-    .hero-name { font-size: clamp(2.1rem,8.2vw,3rem); white-space: nowrap; }
+    .page { width: min(100% - 34px, 980px); }
+    .site-header { justify-content: center; padding: 0 12px; }
+    .nav {
+        flex-wrap: nowrap;
+        gap: 4px;
+        width: 100%;
+        overflow-x: hidden;
+        justify-content: center;
+    }
+    .nav-link { padding: 6px 9px; font-size: 0.78rem; white-space: nowrap; gap: 5px; }
+    .nav-icon { width: 13px; height: 13px; }
+    .nav-icon svg { width: 12px; height: 12px; }
+    .hero-copy {
+        align-items: center;
+        text-align: center;
+        margin: 0 auto;
+        max-width: 100%;
+    }
+    .hero-name { font-size: clamp(2.1rem,8.2vw,3rem); white-space: normal; }
     .hero-role { margin-top: 1.9rem; font-size: 0.8rem; letter-spacing: 0.14em; white-space: normal; }
+    .hero-actions { width: 100%; flex-wrap: wrap; justify-content: center; }
+    .button { min-height: 40px; padding: 0 16px; }
     .art-frame, #d3-art { min-height: 360px; height: 360px; }
     .section { padding: 22px 0 40px; }
+    .section-label, .section-sublabel { letter-spacing: 0.18em; }
+    .project-title-row { align-items: flex-start; }
+    .project-item h2 { font-size: 1.12rem; }
+    .project-item p, .contact-row p { font-size: 0.93rem; line-height: 1.7; }
+    .project-meta span, .project-meta a, .contact-links a { font-size: 0.82rem; }
     .skill-card, .profile-card { padding: 20px; }
+}
+
+@media (max-width: 460px) {
+    .page { width: calc(100% - 28px); }
+    .site-header { padding: 0 8px; }
+    .nav { gap: 2px; }
+    .nav-link { padding: 6px 7px; font-size: 0.74rem; }
+    .hero-copy { padding-inline: 2px; }
+    .hero { gap: 36px; padding-top: 28px; }
+    .kicker { margin-bottom: 1.1rem; }
+    .hero-role { margin-top: 1.35rem; letter-spacing: 0.1em; }
+    .button { width: 100%; justify-content: center; }
+    .art-frame, #d3-art { min-height: 300px; height: 300px; }
+    .project-item { gap: 16px; padding: 24px 0; }
+    .skills-grid, .profiles-grid { gap: 12px; }
+    .profile-card-inner { align-items: flex-start; }
+    .contact-links { width: 100%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
